@@ -27,11 +27,11 @@ def load_database_results():
     try:
         con = pymysql.connect(host=db_config.DB_SERVER,
                               user=db_config.DB_USER,
-                              password=db_config.DB_PASS,
                               database=db_config.DB)
+        con.close()
+        messagebox.showinfo("Connected to Database", "Connected OK")
     except pymysql.InternalError as e:
         messagebox.showinfo("Connection Error", e)
-    return
     return
 
 file_name = "default.png"
@@ -124,6 +124,7 @@ buttonCommit.grid(row=4, column=1, padx=15, pady=15)
 buttonAddImage.grid(row=4, column=2, padx=15, pady=15)
 # === END ADDING WIDGETS TO GRID ON TAB TWO
 
-tab_parent.pack(expand=1, fill='both')
+load_database_results()
 
+tab_parent.pack(expand=1, fill='both')
 form.mainloop()
